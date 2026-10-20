@@ -1,0 +1,407 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>AnimalSound | Animal Sound Recognition</title>
+
+    <!-- Connect the external CSS file -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- ================= HEADER ================= -->
+
+    <header>
+        <div class="container header-content">
+
+            <div class="logo">
+                🐾 Animal<span>Sound</span>
+            </div>
+
+            <div class="header-tag">
+                Digital Signal Processing Project
+            </div>
+
+        </div>
+    </header>
+
+
+    <!-- ================= HERO SECTION ================= -->
+
+    <section class="hero">
+
+        <span class="hero-label">
+            FFT + AUDIO CLASSIFICATION
+        </span>
+
+        <h1>
+            Discover the Sound of <span>Animals</span>
+        </h1>
+
+        <p>
+            Upload an animal sound recording and explore its
+            waveform, frequency spectrum, dominant frequency,
+            and predicted sound category.
+        </p>
+
+    </section>
+
+
+    <!-- ================= MAIN CONTENT ================= -->
+
+    <main class="container">
+
+        <!-- AUDIO UPLOAD CARD -->
+
+        <section class="card">
+
+            <h2>🎧 Upload an Audio File</h2>
+
+            <p class="card-description">
+                Select an audio recording to begin the analysis.
+            </p>
+
+            <div class="upload-area">
+
+                <div class="upload-icon">🎵</div>
+
+                <h3>Choose Your Sound Recording</h3>
+
+                <p>
+                    Upload a clear recording of an animal sound.
+                </p>
+
+                <label
+                    for="audioUpload"
+                    class="upload-button"
+                >
+                    Choose Audio File
+                </label>
+
+                <input
+                    type="file"
+                    id="audioUpload"
+                    accept="audio/*,.wav,.mp3,.ogg,.m4a"
+                    aria-label="Choose an audio file"
+                >
+
+                <p id="fileName">
+                    No audio file selected
+                </p>
+
+                <p class="format-note">
+                    WAV and MP3 are recommended.
+                    Supported formats depend on your browser.
+                </p>
+
+            </div>
+
+
+            <!-- AUDIO PLAYER -->
+
+            <div id="audioSection" class="hidden">
+
+                <h3>Audio Preview</h3>
+
+                <audio
+                    id="audioPlayer"
+                    controls
+                    preload="metadata"
+                >
+                    Your browser does not support audio playback.
+                </audio>
+
+            </div>
+
+
+            <!-- ANALYSIS STATUS -->
+
+            <p
+                id="analysisStatus"
+                role="status"
+                aria-live="polite"
+            >
+                Upload an audio file to start the analysis.
+            </p>
+
+        </section>
+
+
+        <!-- ================= ANALYSIS RESULTS ================= -->
+
+        <section
+            id="resultsSection"
+            class="card hidden"
+        >
+
+            <h2>📊 Analysis Results</h2>
+
+            <p class="card-description">
+                Results generated from your uploaded recording.
+            </p>
+
+
+            <!-- RESULT SUMMARY CARDS -->
+
+            <div class="result-grid">
+
+                <!-- Predicted Animal -->
+
+                <div class="result-box">
+
+                    <div class="label">
+                        Predicted Animal
+                    </div>
+
+                    <div
+                        class="value"
+                        id="animalResult"
+                    >
+                        —
+                    </div>
+
+                </div>
+
+
+                <!-- Dominant Frequency -->
+
+                <div class="result-box">
+
+                    <div class="label">
+                        Dominant Frequency
+                    </div>
+
+                    <div class="value">
+                        <span id="frequencyResult">—</span>
+                        <span style="font-size: 14px;">Hz</span>
+                    </div>
+
+                </div>
+
+
+                <!-- Model Score -->
+
+                <div class="result-box">
+
+                    <div class="label">
+                        Model Score
+                    </div>
+
+                    <div
+                        class="value"
+                        id="confidenceResult"
+                    >
+                        —
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- ================= WAVEFORM ================= -->
+
+            <div class="chart-card">
+
+                <h3>1. Time-Domain Waveform</h3>
+
+                <p>
+                    The waveform shows how the amplitude of the
+                    audio signal changes with time.
+                </p>
+
+                <div class="chart-wrapper">
+
+                    <canvas
+                        id="waveformCanvas"
+                        role="img"
+                        aria-label="Time-domain audio waveform"
+                    >
+                        Your browser does not support canvas.
+                    </canvas>
+
+                </div>
+
+            </div>
+
+
+            <!-- ================= FFT SPECTRUM ================= -->
+
+            <div class="chart-card">
+
+                <h3>2. Frequency-Domain Spectrum (FFT)</h3>
+
+                <p>
+                    The Fast Fourier Transform (FFT) represents
+                    the audio signal in terms of its frequency
+                    components.
+                </p>
+
+                <div class="chart-wrapper">
+
+                    <canvas
+                        id="fftCanvas"
+                        role="img"
+                        aria-label="Frequency-domain FFT spectrum"
+                    >
+                        Your browser does not support canvas.
+                    </canvas>
+
+                </div>
+
+            </div>
+
+
+            <!-- ================= ANIMAL SCORES ================= -->
+
+            <div class="chart-card">
+
+                <h3>3. Animal Category Scores</h3>
+
+                <p>
+                    Compare the normalized scores for the animal
+                    categories supported by this application.
+                    These are not verified accuracy percentages.
+                </p>
+
+                <!-- JavaScript creates the score bars here -->
+
+                <div id="probabilityBars"></div>
+
+            </div>
+
+
+            <!-- JavaScript adds the model labels here -->
+
+            <div id="modelLabels" class="model-labels"></div>
+
+        </section>
+
+
+        <!-- ================= HOW IT WORKS ================= -->
+
+        <section class="card">
+
+            <h2>💡 How Does It Work?</h2>
+
+            <p class="card-description">
+                This project combines Digital Signal Processing
+                with a pretrained audio-classification model.
+            </p>
+
+
+            <div class="info-grid">
+
+                <!-- Step 1 -->
+
+                <div class="info-item">
+
+                    <div class="icon">🎙️</div>
+
+                    <h3>Step 1: Audio Input</h3>
+
+                    <p>
+                        The browser reads the selected audio file
+                        and converts it into numerical samples
+                        for further processing.
+                    </p>
+
+                </div>
+
+
+                <!-- Step 2 -->
+
+                <div class="info-item">
+
+                    <div class="icon">〰️</div>
+
+                    <h3>Step 2: Signal Analysis</h3>
+
+                    <p>
+                        The waveform displays amplitude over time.
+                        FFT helps reveal the frequency components
+                        present in the audio signal.
+                    </p>
+
+                </div>
+
+
+                <!-- Step 3 -->
+
+                <div class="info-item">
+
+                    <div class="icon">🤖</div>
+
+                    <h3>Step 3: Classification</h3>
+
+                    <p>
+                        The pretrained YAMNet model returns scores
+                        for sound categories. The application
+                        groups selected labels into animal
+                        categories to estimate the sound type.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- IMPORTANT LIMITATION -->
+
+            <div class="method-note">
+
+                <strong>Important:</strong>
+
+                A dominant frequency alone cannot identify an
+                animal. The classification is an estimate from
+                a pretrained model. Some recordings may be
+                misclassified or returned as unknown.
+
+                The displayed model score is not a guarantee
+                of real-world prediction accuracy.
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- ================= FOOTER ================= -->
+
+    <footer>
+
+        <p>
+            <strong>AnimalSound</strong> — Animal Sound
+            Recognition using FFT and Audio Classification
+        </p>
+
+        <p>
+            Digital Signal Processing | Academic Project
+        </p>
+
+    </footer>
+
+
+    <!-- ================= JAVASCRIPT LIBRARY ================= -->
+
+    <!-- Load MediaPipe before script.js -->
+
+    <script
+        src="https://cdn.jsdelivr.net/npm/@mediapipe/tasks-audio@0.10.14/audio_bundle.js"
+        crossorigin="anonymous"
+    ></script>
+
+
+    <!-- Connect your external JavaScript file -->
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
