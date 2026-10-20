@@ -1,0 +1,586 @@
+
+/* ==========================================
+   ANIMALSOUND - ANIMAL SOUND RECOGNITION
+   Main stylesheet
+   ========================================== */
+
+/* ---------- RESET ---------- */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary: #5b50e8;
+    --primary-dark: #473bd0;
+    --primary-light: #e9e7ff;
+    --background: #f4f6fb;
+    --surface: #ffffff;
+    --text: #20243a;
+    --muted: #72798a;
+    --border: #e7e9f1;
+    --success: #16845b;
+    --warning-bg: #fff9e9;
+    --warning-border: #f3e6bb;
+    --radius: 16px;
+    --shadow: 0 5px 20px rgba(25, 35, 75, 0.04);
+}
+
+/* ---------- PAGE ---------- */
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: var(--background);
+    color: var(--text);
+    line-height: 1.6;
+    min-height: 100vh;
+}
+
+button,
+input,
+textarea,
+select {
+    font: inherit;
+}
+
+button,
+label {
+    -webkit-tap-highlight-color: transparent;
+}
+
+.container {
+    width: 92%;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* ---------- HEADER ---------- */
+
+header {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 18px 0;
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+}
+
+.logo {
+    color: var(--primary);
+    font-size: 25px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+}
+
+.logo span {
+    color: var(--text);
+}
+
+.header-tag {
+    color: var(--muted);
+    font-size: 13px;
+}
+
+/* ---------- HERO SECTION ---------- */
+
+.hero {
+    text-align: center;
+    padding: 55px 15px 35px;
+}
+
+.hero-label {
+    display: inline-block;
+    background: var(--primary-light);
+    color: var(--primary-dark);
+    padding: 6px 13px;
+    border-radius: 30px;
+    font-size: 12px;
+    font-weight: 700;
+    margin-bottom: 18px;
+}
+
+.hero h1 {
+    font-size: clamp(30px, 5vw, 44px);
+    line-height: 1.2;
+    margin-bottom: 15px;
+    letter-spacing: -1px;
+}
+
+.hero h1 span {
+    color: var(--primary);
+}
+
+.hero p {
+    max-width: 700px;
+    margin: 0 auto;
+    color: var(--muted);
+    font-size: 16px;
+}
+
+/* ---------- MAIN CONTENT ---------- */
+
+main {
+    padding-bottom: 45px;
+}
+
+.card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 25px;
+    margin-bottom: 24px;
+    box-shadow: var(--shadow);
+}
+
+.card h2 {
+    font-size: 21px;
+    line-height: 1.4;
+    margin-bottom: 8px;
+}
+
+.card-description {
+    color: var(--muted);
+    font-size: 14px;
+    margin-bottom: 20px;
+}
+
+/* ---------- UPLOAD AREA ---------- */
+
+.upload-area {
+    border: 2px dashed #c7c4fa;
+    background: #fafaff;
+    border-radius: 14px;
+    padding: 35px 15px;
+    text-align: center;
+    transition:
+        border-color 0.2s ease,
+        background 0.2s ease;
+}
+
+.upload-area:hover {
+    border-color: var(--primary);
+    background: #f7f6ff;
+}
+
+.upload-icon {
+    font-size: 42px;
+    line-height: 1.3;
+    margin-bottom: 8px;
+}
+
+.upload-area h3 {
+    font-size: 18px;
+    margin-bottom: 8px;
+}
+
+.upload-area p {
+    color: var(--muted);
+    font-size: 14px;
+    margin-bottom: 17px;
+}
+
+/* Hide the native input; the label opens it */
+
+#audioUpload {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    clip-path: inset(50%);
+}
+
+.upload-button {
+    display: inline-block;
+    background: var(--primary);
+    color: #ffffff;
+    border: none;
+    padding: 12px 23px;
+    border-radius: 9px;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease;
+}
+
+.upload-button:hover {
+    background: var(--primary-dark);
+    transform: translateY(-1px);
+}
+
+.upload-button:focus-visible {
+    outline: 3px solid #b7b1ff;
+    outline-offset: 4px;
+}
+
+#fileName {
+    margin-top: 15px;
+    margin-bottom: 0;
+    color: var(--primary-dark);
+    font-size: 14px;
+    overflow-wrap: anywhere;
+}
+
+.format-note {
+    margin-top: 13px !important;
+    margin-bottom: 0 !important;
+    color: #8a90a0 !important;
+    font-size: 12px !important;
+}
+
+/* ---------- AUDIO PLAYER ---------- */
+
+#audioSection {
+    margin-top: 22px;
+}
+
+#audioSection h3 {
+    font-size: 16px;
+    margin-bottom: 8px;
+}
+
+audio {
+    display: block;
+    width: 100%;
+    margin-top: 12px;
+}
+
+/* ---------- ANALYSIS STATUS ---------- */
+
+#analysisStatus {
+    margin-top: 15px;
+    color: #667085;
+    font-size: 14px;
+    overflow-wrap: anywhere;
+}
+
+#analysisStatus:empty {
+    display: none;
+}
+
+/* ---------- RESULT SUMMARY ---------- */
+
+.result-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 15px;
+    margin-top: 22px;
+}
+
+.result-box {
+    background: #f8f8ff;
+    border: 1px solid #e9e8ff;
+    border-radius: 12px;
+    padding: 18px;
+    min-width: 0;
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.result-box:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(91, 80, 232, 0.08);
+}
+
+.result-box .label {
+    color: var(--muted);
+    font-size: 13px;
+    margin-bottom: 8px;
+}
+
+.result-box .value {
+    color: var(--primary-dark);
+    font-size: clamp(17px, 2.4vw, 24px);
+    font-weight: 700;
+    overflow-wrap: anywhere;
+}
+
+/* ---------- CHART SECTIONS ---------- */
+
+.chart-card {
+    margin-top: 26px;
+}
+
+.chart-card h3 {
+    font-size: 17px;
+    margin-bottom: 5px;
+}
+
+.chart-card > p {
+    color: var(--muted);
+    font-size: 13px;
+    margin-bottom: 12px;
+}
+
+.chart-wrapper {
+    width: 100%;
+    overflow: hidden;
+    background: #fafbfe;
+    border: 1px solid #eceef5;
+    border-radius: 10px;
+}
+
+/*
+   JavaScript sets the canvas drawing dimensions.
+   CSS controls the displayed size.
+*/
+
+canvas {
+    display: block;
+    width: 100%;
+    height: 300px;
+}
+
+/* ---------- PROBABILITY BARS ---------- */
+
+#probabilityBars {
+    margin-top: 20px;
+}
+
+.probability-item {
+    margin-bottom: 17px;
+}
+
+.probability-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 7px;
+    font-size: 14px;
+}
+
+.probability-info span:first-child {
+    font-weight: 700;
+    color: var(--text);
+}
+
+.probability-info span:last-child {
+    color: var(--muted);
+    font-variant-numeric: tabular-nums;
+}
+
+.probability-background {
+    width: 100%;
+    height: 9px;
+    background: #ececf5;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.probability-fill {
+    height: 100%;
+    width: 0;
+    background: var(--primary);
+    border-radius: 20px;
+    transition: width 0.5s ease;
+}
+
+/* ---------- MODEL LABELS ---------- */
+
+.model-labels {
+    margin-top: 20px;
+    padding: 13px;
+    background: #f7f7fc;
+    border: 1px solid #eceaf9;
+    border-radius: 8px;
+    color: #626a7c;
+    font-size: 13px;
+    overflow-wrap: anywhere;
+}
+
+/* ---------- HOW IT WORKS ---------- */
+
+.info-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 18px;
+}
+
+.info-item {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+    transition:
+        border-color 0.2s ease,
+        transform 0.2s ease;
+}
+
+.info-item:hover {
+    border-color: #c7c4fa;
+    transform: translateY(-2px);
+}
+
+.info-item .icon {
+    font-size: 28px;
+    margin-bottom: 8px;
+}
+
+.info-item h3 {
+    font-size: 16px;
+    margin-bottom: 7px;
+}
+
+.info-item p {
+    color: var(--muted);
+    font-size: 13px;
+}
+
+/* ---------- IMPORTANT NOTE ---------- */
+
+.method-note {
+    margin-top: 22px;
+    padding: 15px;
+    background: var(--warning-bg);
+    border: 1px solid var(--warning-border);
+    border-radius: 10px;
+    color: #6c5a2a;
+    font-size: 13px;
+}
+
+.method-note strong {
+    color: #55451c;
+}
+
+/* ---------- FOOTER ---------- */
+
+footer {
+    text-align: center;
+    background: var(--surface);
+    border-top: 1px solid var(--border);
+    padding: 25px 15px;
+    color: #777e8f;
+    font-size: 13px;
+}
+
+footer p + p {
+    margin-top: 5px;
+}
+
+footer strong {
+    color: var(--primary);
+}
+
+/* ---------- ACCESSIBILITY ---------- */
+
+:focus-visible {
+    outline: 3px solid #a9a2ff;
+    outline-offset: 3px;
+}
+
+/* ---------- TABLET ---------- */
+
+@media (max-width: 850px) {
+    .container {
+        width: 94%;
+    }
+
+    .info-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .result-grid {
+        gap: 10px;
+    }
+
+    .result-box {
+        padding: 14px;
+    }
+}
+
+/* ---------- MOBILE ---------- */
+
+@media (max-width: 600px) {
+    .header-content {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .logo {
+        font-size: 23px;
+    }
+
+    .hero {
+        padding: 38px 10px 28px;
+    }
+
+    .hero h1 {
+        font-size: 30px;
+    }
+
+    .hero p {
+        font-size: 14px;
+    }
+
+    .card {
+        padding: 18px;
+        border-radius: 13px;
+    }
+
+    .card h2 {
+        font-size: 19px;
+    }
+
+    .upload-area {
+        padding: 27px 12px;
+    }
+
+    .result-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .result-box {
+        padding: 16px;
+    }
+
+    .result-box .value {
+        font-size: 21px;
+    }
+
+    .info-grid {
+        grid-template-columns: 1fr;
+    }
+
+    canvas {
+        height: 240px;
+    }
+
+    .chart-card {
+        margin-top: 22px;
+    }
+}
+
+/* ---------- REDUCED MOTION ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+        transition-duration: 0.01ms !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+    }
+}
